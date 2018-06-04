@@ -79,16 +79,31 @@
 
 
 
-<meta name="description" content="From the Internet to the Internet">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Qiang&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="一、 前言2018年5月28日，北京晴有轻度沙尘暴。 坐上公交车走在上班的路上，想起老罗经常说起的一句话：想成盛田昭夫时代的索尼，想成乔布斯时代的苹果，于是继续研读着 《日本制造：盛田昭夫的日式经营学》。 到了人大西门在西区食堂吃了个早餐，穿过人民大学很快就来到了公司。坐在工位上打开电脑登上QQ，不一会运营的CC的头像就开始闪动，“mooc平台登录不了”，“你看看”。又一会领导的头像开始闪动，“x">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL数据恢复">
+<meta property="og:url" content="http://yoursite.com/2018/06/04/mysql-data-recovery/index.html">
 <meta property="og:site_name" content="Qiang&#39;s blog">
-<meta property="og:description" content="From the Internet to the Internet">
+<meta property="og:description" content="一、 前言2018年5月28日，北京晴有轻度沙尘暴。 坐上公交车走在上班的路上，想起老罗经常说起的一句话：想成盛田昭夫时代的索尼，想成乔布斯时代的苹果，于是继续研读着 《日本制造：盛田昭夫的日式经营学》。 到了人大西门在西区食堂吃了个早餐，穿过人民大学很快就来到了公司。坐在工位上打开电脑登上QQ，不一会运营的CC的头像就开始闪动，“mooc平台登录不了”，“你看看”。又一会领导的头像开始闪动，“x">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/service_nginx_stop_start.png">
+<meta property="og:image" content="http://yoursite.com/images/service_php-fpm_stop_start.png">
+<meta property="og:image" content="http://yoursite.com/images/service_mysql_start.png">
+<meta property="og:image" content="http://yoursite.com/images/chown_chmod.png">
+<meta property="og:image" content="http://yoursite.com/images/service_mysql_start.png">
+<meta property="og:image" content="http://yoursite.com/images/binlog.png">
+<meta property="og:image" content="http://yoursite.com/images/binlog_open.png">
+<meta property="og:image" content="http://yoursite.com/images/binlog_config.png">
+<meta property="og:image" content="http://yoursite.com/images/find_mysql.png">
+<meta property="og:image" content="http://yoursite.com/images/mysqlbinlog.png">
+<meta property="og:image" content="http://yoursite.com/images/mysqlbinlog_2_sql.png">
+<meta property="og:image" content="http://yoursite.com/images/mysqlbinlog_many_time.png">
+<meta property="og:image" content="http://yoursite.com/images/mysqlbinlog_position.png">
+<meta property="og:updated_time" content="2018-06-04T04:47:57.978Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Qiang&#39;s blog">
-<meta name="twitter:description" content="From the Internet to the Internet">
+<meta name="twitter:title" content="MySQL数据恢复">
+<meta name="twitter:description" content="一、 前言2018年5月28日，北京晴有轻度沙尘暴。 坐上公交车走在上班的路上，想起老罗经常说起的一句话：想成盛田昭夫时代的索尼，想成乔布斯时代的苹果，于是继续研读着 《日本制造：盛田昭夫的日式经营学》。 到了人大西门在西区食堂吃了个早餐，穿过人民大学很快就来到了公司。坐在工位上打开电脑登上QQ，不一会运营的CC的头像就开始闪动，“mooc平台登录不了”，“你看看”。又一会领导的头像开始闪动，“x">
+<meta name="twitter:image" content="http://yoursite.com/images/service_nginx_stop_start.png">
 
 
 
@@ -118,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/04/mysql-data-recovery/"/>
 
 
 
 
 
-  <title>Qiang's blog</title>
+  <title>MySQL数据恢复 | Qiang's blog</title>
   
 
 
@@ -143,8 +158,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -247,9 +261,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -279,9 +293,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/04/mysql-data-recovery/" itemprop="url">MySQL数据恢复</a></h1>
+          <h1 class="post-title" itemprop="name headline">MySQL数据恢复</h1>
         
 
         <div class="post-meta">
@@ -331,9 +343,7 @@
       
 
       
-        
-          
-            <h2 id="一、-前言"><a href="#一、-前言" class="headerlink" title="一、 前言"></a>一、 前言</h2><p>2018年5月28日，北京晴有轻度沙尘暴。 坐上公交车走在上班的路上，想起老罗经常说起的一句话：想成盛田昭夫时代的索尼，想成乔布斯时代的苹果，于是继续研读着 <strong>《日本制造：盛田昭夫的日式经营学》</strong>。</p>
+        <h2 id="一、-前言"><a href="#一、-前言" class="headerlink" title="一、 前言"></a>一、 前言</h2><p>2018年5月28日，北京晴有轻度沙尘暴。 坐上公交车走在上班的路上，想起老罗经常说起的一句话：想成盛田昭夫时代的索尼，想成乔布斯时代的苹果，于是继续研读着 <strong>《日本制造：盛田昭夫的日式经营学》</strong>。</p>
 <p>到了人大西门在西区食堂吃了个早餐，穿过人民大学很快就来到了公司。坐在工位上打开电脑登上QQ，不一会运营的CC的头像就开始闪动，<strong>“mooc平台登录不了”，“你看看”</strong>。又一会领导的头像开始闪动，<strong>“xxx说慕课平台不能登录了”</strong>。<br>额… 这事都惊动领导了？ </p>
 <h2 id="二、-排查问题"><a href="#二、-排查问题" class="headerlink" title="二、 排查问题"></a>二、 排查问题</h2><p>打开chrome浏览器开始预览，等了好久代理服务器才反馈</p>
 <blockquote>
@@ -528,8 +538,6 @@
 <p><strong>MySQL：</strong> 5.5.49</p>
 <p><strong>安装MySQL方式：</strong> rpm</p>
 
-          
-        
       
     </div>
     
@@ -546,12 +554,12 @@
       
 
       
+      
+      
 
       
 
       
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -561,10 +569,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -572,6 +581,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -592,8 +605,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -635,6 +657,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、-前言"><span class="nav-number">1.</span> <span class="nav-text">一、 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、-排查问题"><span class="nav-number">2.</span> <span class="nav-text">二、 排查问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、-恢复进程"><span class="nav-number">3.</span> <span class="nav-text">三、 恢复进程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、-Mysql权限问题"><span class="nav-number">3.0.1.</span> <span class="nav-text">1、 Mysql权限问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、-Mysql-服务已开启"><span class="nav-number">3.0.2.</span> <span class="nav-text">2、 Mysql 服务已开启</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、-残余数据影响了Mysql服务的启动"><span class="nav-number">3.0.3.</span> <span class="nav-text">3、 残余数据影响了Mysql服务的启动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、-Mysql配置文件-默认为：-etc-my-cnf"><span class="nav-number">3.0.4.</span> <span class="nav-text">4、 Mysql配置文件(默认为：/etc/my.cnf)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、-skip-federated字段问题"><span class="nav-number">3.0.5.</span> <span class="nav-text">5、 skip-federated字段问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6、-selinux的问题"><span class="nav-number">3.0.6.</span> <span class="nav-text">6、 selinux的问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#恢复表结构"><span class="nav-number">4.</span> <span class="nav-text">恢复表结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、-InnoDB数据库引擎"><span class="nav-number">4.0.1.</span> <span class="nav-text">1、 InnoDB数据库引擎</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、-MyISAM数据库引擎"><span class="nav-number">4.0.2.</span> <span class="nav-text">2、 MyISAM数据库引擎</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#binlog日志"><span class="nav-number">5.</span> <span class="nav-text">binlog日志</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#恢复数据（binlog日志方式）"><span class="nav-number">6.</span> <span class="nav-text">恢复数据（binlog日志方式）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#备注"><span class="nav-number">8.</span> <span class="nav-text">备注</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -768,6 +806,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
