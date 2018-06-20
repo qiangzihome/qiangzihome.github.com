@@ -262,6 +262,214 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/20/mysql-backup/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liqiang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Qiang's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/20/mysql-backup/" itemprop="url">MySQL备份还原和自动化</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-20T14:38:01+08:00">
+                2018-06-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h2><p>2018年5月28日这个日子已经过去20几天了，那天发生的一切到现在回想一下都有些后怕。最近看了一篇文章里面有一句话挺好，<strong>删库（数据库损坏）只有两条路可以走，一是恢复，二是跑路</strong>。很明显我选择了第一条路，有一份幸运也有一份执着最终还是把数据恢复了回来。为什么说“幸运”呢？因为rpm方式安装的MySQL数据库默认打开了binlog日志，而且日志文件被完整的保存了下来。</p>
+<p>虽然数据恢复了回来，但是我真心的不希望数据再次丢失了，因为下一次可能没有那么幸运。恢复数据只是在万不得已的情况下采取的补救措施，我们应该把<strong>备份数据</strong>作为日常维护的好习惯。</p>
+<h2 id="MySQL数据库备份及数据恢复"><a href="#MySQL数据库备份及数据恢复" class="headerlink" title="MySQL数据库备份及数据恢复"></a>MySQL数据库备份及数据恢复</h2><h4 id="1-数据库备份"><a href="#1-数据库备份" class="headerlink" title="1.数据库备份"></a>1.数据库备份</h4><p>数据备份是我们使用计算机的同学日常的工作。不仅数据库需要定时备份，计算机上面重要的文件也需要定期做备份，那我们今天就来谈谈MySQL是怎样进行备份的。</p>
+<p>MySQL给我们提供了一个实用的工具 <strong>mysqldump</strong>，使用该工具前要确定MySQL服务已经启动，那我们就直接来上实例吧！</p>
+<p><strong>备份所有的数据库</strong></p>
+<blockquote>
+<p>mysqldump -u数据库账号 -p数据库密码 &gt; 导出的文件名</p>
+<p>mysqldump -uroot -proot &gt; mysql_all.sql</p>
+</blockquote>
+<p><strong>备份某一个数据库</strong></p>
+<blockquote>
+<p>mysqldump -u数据库账号 -p数据库密码 数据库名 &gt; 导出的文件名和路径</p>
+<p>mysqldump -uroot -proot test &gt; test.sql</p>
+</blockquote>
+<p><strong>备份远程服务器上面的某一个数据库</strong></p>
+<blockquote>
+<p>mysqldump -h数据库服务器地址 -u数据库账号 -p数据库密码 数据库名 &gt; 导出的文件名</p>
+<p>mysqldump -h192.168.1.11 -uroot -proot test &gt; test.sql</p>
+</blockquote>
+<p><strong>日常中我使用的备份命令</strong></p>
+<blockquote>
+<p>mysqldump -uroot -proot test –default-character-set=utf8 &gt; test.sql</p>
+</blockquote>
+<p>这里我加了一个参数：<strong>–default-character-set=utf8</strong>，对于中国的程序员来说乱码问题是我们的必修课。为了不给数据或程序带来乱码的困惑，我们肯定会给程序设定统一的编码方式。我通常使用的编码为<strong>UTF8</strong>，这里我们和数据库的编码保持一致即可。</p>
+<h4 id="2-数据库还原"><a href="#2-数据库还原" class="headerlink" title="2. 数据库还原"></a>2. 数据库还原</h4><p>既然我们说到备份，数据还原是必不可少的，这时我们用到了MySQL常用<strong>mysql</strong>工具。</p>
+<p><strong>数据库还原</strong></p>
+<blockquote>
+<p>mysql -u数据库账号 -p数据库密码 数据库名 &lt; 导入的文件名和路径<br>mysql -uroot -proot test &lt; test.sql</p>
+</blockquote>
+<p><strong>日常中我使用的还原数据库命令</strong></p>
+<blockquote>
+<p>mysql -uroot -proot test –default-character-set=utf8 &lt; test.sql</p>
+</blockquote>
+<h4 id="3-定时备份"><a href="#3-定时备份" class="headerlink" title="3. 定时备份"></a>3. 定时备份</h4><p>我们了解了数据库备份及数据库还原，这时出现了一个疑问？ 备份通常是每隔一段时间都需要进行一次，数据增量较小的话一天一次，但是数据增量要是很大的话需要每天多次，我们不可能每次都是手动去备份，故而我们会考虑有没有一种方式是让电脑定时帮我们完成这个任务。</p>
+<p>Linux服务器有一个定时任务工具：<strong>crontab</strong>，维基百科是这么说的：crontab命令常见于Unix和类Unix的操作系统之中，用于设置周期性被执行的指令。该命令从标准输入设备读取指令，并将其存放于“crontab”文件中，以供之后读取和执行。该词来源于希腊语chronos（χρόνος），原意是时间。</p>
+<p>那我们就直接开始吧！</p>
+<p><strong>首先我们来创建一个shell文件</strong></p>
+<blockquote>
+<p>touch mysql_backup.sh</p>
+</blockquote>
+<p><strong>打开文件的执行权限</strong></p>
+<blockquote>
+<p>chmod +x mysql_backup.sh</p>
+</blockquote>
+<p><strong>编辑该文件</strong></p>
+<blockquote>
+<p>sudo vi mysql_backup.sh</p>
+</blockquote>
+<pre><code>#!/bin/sh
+backupdir=&apos;/home/mysql&apos;
+time=`date +%Y%m%d%H%M`
+mysqldump -uroot -proot test --default-character-set=utf8 &gt; $backupdir/test_$time.sql
+</code></pre><p><strong>内容说明</strong></p>
+<ul>
+<li>backupdir  # 设置备份文件要保存的目录地址</li>
+<li>time # 备份的文件要是很多的话避免重名，通常使用时间来做备份文件的拓展</li>
+<li>$backupdir/test_$time.sql # 组装名称：数据库名 + 时间拓展</li>
+</ul>
+<p><strong>设定定时任务</strong></p>
+<blockquote>
+<p>crontab -e</p>
+</blockquote>
+<pre><code>30 * * * * sh mysql_back.sh # 每30分钟执行一次该命令
+</code></pre><p><strong>crontab的文件格式</strong></p>
+<p>分 时 日 月 周 要运行的命令</p>
+<ul>
+<li>第1列分钟0～59</li>
+<li>第2列小时0～23（0表示子夜）</li>
+<li>第3列日1～31</li>
+<li>第4列月1～12</li>
+<li>第5列星期0～7（0和7表示星期天）</li>
+<li>第6列要运行的命令</li>
+</ul>
+<p><strong>查看定时任务</strong></p>
+<blockquote>
+<p>crontab -l</p>
+</blockquote>
+<p><strong>定时任务控制(操作系统为：centos6，服务的控制centos7是不一样的噢)</strong></p>
+<blockquote>
+<p>service crond start   # 开启服务</p>
+<p>service crond stop    # 关闭服务</p>
+<p>service crond restart # 重启服务</p>
+</blockquote>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>写到这里数据库备份恢复基本已经到一个段落了，做好数据备份是我们每一位计算机使用者良好的习惯，可以更好的避免数据丢失。希望我们能把它当作一种责任。</p>
+<h2 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h2><p>本文所使用的操作系统及数据库版本说明：</p>
+<ul>
+<li>操作系统：centos6.8</li>
+<li>数据库版本：MySQL5.5.49</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/04/mysql-data-recovery/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -281,7 +489,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/04/mysql-data-recovery/" itemprop="url">MySQL数据恢复</a></h1>
+                <a class="post-title-link" href="/2018/06/04/mysql-data-recovery/" itemprop="url">从删库到跑路or恢复，记一次MySQL数据库文件损坏恢复经历</a></h1>
         
 
         <div class="post-meta">
@@ -608,7 +816,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -616,6 +824,15 @@
 
             
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
             
 
           </nav>

@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="qiang's blog" />
+  <meta name="keywords" content="技术交流," />
 
 
 
@@ -80,8 +80,9 @@
 
 
 <meta name="description" content="一、 前言2018年5月28日，北京晴有轻度沙尘暴。 坐上公交车走在上班的路上，想起老罗经常说起的一句话：想成盛田昭夫时代的索尼，想成乔布斯时代的苹果，于是继续研读着 《日本制造：盛田昭夫的日式经营学》。 到了人大西门在西区食堂吃了个早餐，穿过人民大学很快就来到了公司。坐在工位上打开电脑登上QQ，不一会运营的CC的头像就开始闪动，“mooc平台登录不了”，“你看看”。又一会领导的头像开始闪动，“x">
+<meta name="keywords" content="技术交流">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MySQL数据恢复">
+<meta property="og:title" content="从删库到跑路or恢复，记一次MySQL数据库文件损坏恢复经历">
 <meta property="og:url" content="http://yoursite.com/2018/06/04/mysql-data-recovery/index.html">
 <meta property="og:site_name" content="Qiang&#39;s blog">
 <meta property="og:description" content="一、 前言2018年5月28日，北京晴有轻度沙尘暴。 坐上公交车走在上班的路上，想起老罗经常说起的一句话：想成盛田昭夫时代的索尼，想成乔布斯时代的苹果，于是继续研读着 《日本制造：盛田昭夫的日式经营学》。 到了人大西门在西区食堂吃了个早餐，穿过人民大学很快就来到了公司。坐在工位上打开电脑登上QQ，不一会运营的CC的头像就开始闪动，“mooc平台登录不了”，“你看看”。又一会领导的头像开始闪动，“x">
@@ -99,9 +100,9 @@
 <meta property="og:image" content="http://yoursite.com/images/mysqlbinlog_2_sql.png">
 <meta property="og:image" content="http://yoursite.com/images/mysqlbinlog_many_time.png">
 <meta property="og:image" content="http://yoursite.com/images/mysqlbinlog_position.png">
-<meta property="og:updated_time" content="2018-06-04T04:47:57.978Z">
+<meta property="og:updated_time" content="2018-06-20T11:18:53.232Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MySQL数据恢复">
+<meta name="twitter:title" content="从删库到跑路or恢复，记一次MySQL数据库文件损坏恢复经历">
 <meta name="twitter:description" content="一、 前言2018年5月28日，北京晴有轻度沙尘暴。 坐上公交车走在上班的路上，想起老罗经常说起的一句话：想成盛田昭夫时代的索尼，想成乔布斯时代的苹果，于是继续研读着 《日本制造：盛田昭夫的日式经营学》。 到了人大西门在西区食堂吃了个早餐，穿过人民大学很快就来到了公司。坐在工位上打开电脑登上QQ，不一会运营的CC的头像就开始闪动，“mooc平台登录不了”，“你看看”。又一会领导的头像开始闪动，“x">
 <meta name="twitter:image" content="http://yoursite.com/images/service_nginx_stop_start.png">
 
@@ -139,7 +140,7 @@
 
 
 
-  <title>MySQL数据恢复 | Qiang's blog</title>
+  <title>从删库到跑路or恢复，记一次MySQL数据库文件损坏恢复经历 | Qiang's blog</title>
   
 
 
@@ -293,7 +294,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">MySQL数据恢复</h1>
+          <h1 class="post-title" itemprop="name headline">从删库到跑路or恢复，记一次MySQL数据库文件损坏恢复经历</h1>
         
 
         <div class="post-meta">
@@ -552,11 +553,33 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/技术交流/" rel="tag"># 技术交流</a>
+          
+        </div>
+      
 
       
       
       
 
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/20/mysql-backup/" rel="prev" title="MySQL备份还原和自动化">
+                MySQL备份还原和自动化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
 
       
@@ -630,7 +653,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -638,6 +661,15 @@
 
             
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
             
 
           </nav>
